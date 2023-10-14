@@ -1,11 +1,14 @@
+import Nav from "../components/Nav";
+import Main from "../components/Main";
+import SetUpForm from "../components/SetupForm";
+
 export default function SetUp() {
   return (
     <main>
-      <h1 className="bg-red-300 text-4xl">SetUp</h1>
-      <form>
-        <label>Database Connection String or Url</label>
-        <input type="text" placeholder="Enter database connection string" />
-      </form>
+      <Nav />
+      <Main title="Set up your Organization">
+        <SetUpForm />
+      </Main>
     </main>
   );
 }
