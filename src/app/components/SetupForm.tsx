@@ -51,8 +51,8 @@ export default function SetUpForm() {
           </div>
         </div>
       </div>
-      <button className="bg-blue-500 text-white rounded-md p-2 w-8/12 mx-auto">
-        Create Project
+      <button className="bg-blue-500 text-white rounded-md p-2 w-7/12 mx-auto">
+        Next
       </button>
     </form>
   );
