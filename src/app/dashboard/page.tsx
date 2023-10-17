@@ -3,11 +3,14 @@
 import Nav from "../components/Nav";
 import { dummy_data } from "@/data";
 import useSWR from "swr";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { mapData } from "@/utils";
+import Data from "../components/Data";
 
 export default function Dashboard() {
   const token = Cookies.get("token");
+  const [mappedData, setMappedData] = useState<any[]>([]);
 
   const fetcher = (url: string, token: string) =>
     fetch(url, {
@@ -20,7 +23,6 @@ export default function Dashboard() {
     `${process.env.NEXT_PUBLIC_SERVER}/get_db`,
     (url) => fetcher(url, token!)
   );
-  console.log(data);
 
   return (
     <main>
@@ -30,18 +32,14 @@ export default function Dashboard() {
         <p className="text-gray-400 text-sm">
           Create a new project or manage existing projects
         </p>
-        <Suspense fallback={<div>Loading..</div>}>
-          <ol className="flex flex-col gap-3">
-            {dummy_data.map((data, idx) => (
-              <li
-                className="flex flex-row gap-2 w-10/12 mx-auto bg-white rounded-lg text-black h-14 items-center justify-between px-4 cursor-pointer hover:bg-gray-200"
-                key={idx}
-              >
-                {data.name}
-              </li>
-            ))}
-          </ol>
+        <Suspense
+          fallback={<div className="text-white text-2xl">Loading..</div>}
+        >
+          {!isLoading && <Data data={data.data} />}
         </Suspense>
+        <button className="w-7/12 bg-red-600 py-3 text-white font-bold text-center border border-white mx-auto mt-5">
+          Delete All
+        </button>
       </section>
     </main>
   );

@@ -6,10 +6,13 @@ export function storeInCookie(key: string, value: string) {
 
 export function mapData(data: any) {
   const mappedData = new Map();
-  const keys = Object.keys(data);
-  keys.forEach((key) => {
-    mappedData.set(key, data[key]);
-  });
-  console.log(mappedData);
-  return mappedData;
+  const mappedDataArray = [];
+  for (let i of data) {
+    const keys = Object.keys(i);
+    keys.forEach((key) => {
+      mappedData.set(key, i[key]);
+    });
+    mappedDataArray.push(mappedData);
+  }
+  return mappedDataArray;
 }
