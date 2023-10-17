@@ -1,24 +1,31 @@
 import { useState } from "react";
 import ActiveData from "./ActiveData";
 import Cookies from "js-cookie";
+import AddData from "./AddData";
 
 export default function Data({ data }: { data: any }) {
   const [activeData, setActiveData] = useState<number | null>(null);
+  const [addData, setAddData] = useState(false);
   const tableName = Cookies.get("tableName");
 
   function getKeys(obj: any) {
     return Object.keys(obj);
   }
-  function handleEdit() {}
   function handleDelete() {}
   return (
     <div>
       {typeof activeData === "number" && (
         <ActiveData data={data[activeData]} setter={setActiveData} />
       )}
+      {addData && (
+        <AddData data={data[0] ? data[0] : null} setter={setAddData} />
+      )}
       <div className="flex flex-col justify-center items-end gap-4 mb-3 w-11/12">
         <h1 className="text-2xl font-bold">{tableName}</h1>
-        <span className="flex flex-row gap-3 items-center border py-1 px-2">
+        <span
+          className="flex flex-row gap-3 items-center border py-1 px-2"
+          onClick={() => setAddData(!addData)}
+        >
           <span>Add new item</span>
           <i className="fas fa-plus"></i>
         </span>
