@@ -59,7 +59,7 @@ export default function AddData({
         ) : (
           <div className="flex flex-col items-center">
             <span className="text-2xl text-gray-300 mb-3">No data found</span>
-            <div className="border px-3 py-1 mx-auto text-lg bg-slate-200 flex flex-row items-center gap-4">
+            <div className="border px-3 py-1 mx-auto text-lg bg-slate-200 flex flex-row items-center gap-4 cursor-pointer">
               <span>Add new field</span>
               <i className="fas fa-plus"></i>
             </div>

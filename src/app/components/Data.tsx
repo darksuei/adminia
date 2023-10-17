@@ -23,7 +23,7 @@ export default function Data({ data }: { data: any }) {
       <div className="flex flex-col justify-center items-end gap-4 mb-3 w-11/12">
         <h1 className="text-2xl font-bold">{tableName}</h1>
         <span
-          className="flex flex-row gap-3 items-center border py-1 px-2"
+          className="flex flex-row gap-3 items-center border py-1 px-2 cursor-pointer"
           onClick={() => setAddData(!addData)}
         >
           <span>Add new item</span>

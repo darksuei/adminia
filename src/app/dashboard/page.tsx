@@ -27,9 +27,7 @@ export default function Dashboard() {
       <Nav />
       <section className="flex flex-col gap-4 px-20">
         <h1 className="text-4xl font-bold">Dashboard</h1>
-        <p className="text-gray-400 text-sm">
-          Create a new project or manage existing projects
-        </p>
+        <p className="text-gray-400 text-sm">Manage existing projects</p>
         <Suspense
           fallback={<div className="text-white text-2xl">Loading..</div>}
         >
