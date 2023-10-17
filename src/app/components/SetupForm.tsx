@@ -24,9 +24,9 @@ export default function SetUpForm() {
   return (
     <Formik
       initialValues={{
-        projectName: "",
-        connectionString: "",
-        database: activeDatabase,
+        projectName: user.projectName || "",
+        connectionString: user.connectionString || "",
+        database: user.database || activeDatabase,
       }}
       onSubmit={async (values, { resetForm }) => {
         values.database = activeDatabase;
