@@ -6,4 +6,5 @@ export function storeInCookie(key: string, value: string) {
 
 export function logOut() {
   Cookies.remove("token");
+  Cookies.remove("tableName");
 }

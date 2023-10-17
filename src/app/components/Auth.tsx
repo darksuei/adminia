@@ -31,6 +31,7 @@ export default function Auth({ isSignUp, title }: Params) {
           } else {
             const response = await Login(values);
             storeInCookie("token", response.user.token);
+            storeInCookie("tableName", response.user.tableName);
             response.user.database
               ? router.push("/dashboard")
               : router.push("/setup");

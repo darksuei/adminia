@@ -6,7 +6,6 @@ import { Suspense } from "react";
 import Cookies from "js-cookie";
 import Data from "../components/Data";
 import { DeleteAllData } from "@/services";
-import ActiveData from "../components/ActiveData";
 
 export default function Dashboard() {
   const token = Cookies.get("token");
@@ -25,7 +24,6 @@ export default function Dashboard() {
 
   return (
     <main>
-      {/* <ActiveData data={data.data} /> */}
       <Nav />
       <section className="flex flex-col gap-4 px-20">
         <h1 className="text-4xl font-bold">Dashboard</h1>

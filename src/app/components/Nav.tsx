@@ -11,8 +11,9 @@ export default function Nav() {
         <li className="cursor-pointer text-sm hover:text-red-400">
           <Link href="/dashboard">Dashboard</Link>
         </li>
-        <li className="cursor-pointer text-sm hover:text-red-400">Account</li>
-        <li className="cursor-pointer text-sm hover:text-red-400">Settings</li>
+        <li className="cursor-pointer text-sm hover:text-red-400">
+          <Link href="/setup">Settings</Link>
+        </li>
         <li
           className="cursor-pointer text-sm hover:text-red-400"
           onClick={() => {
