@@ -2,8 +2,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import { Login, Register } from "@/services";
-import { UserContext } from "@/contexts";
-import { useContext } from "react";
+import { storeInCookie } from "@/utils";
+import { useRouter } from "next/navigation";
 
 type Params = {
   isSignUp: boolean;
@@ -11,7 +11,7 @@ type Params = {
 };
 
 export default function Auth({ isSignUp, title }: Params) {
-  const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
   return (
     <main className="h-screen w-full flex items-center">
@@ -24,13 +24,16 @@ export default function Auth({ isSignUp, title }: Params) {
         onSubmit={async (values, { resetForm }) => {
           if (isSignUp) {
             const response = await Register(values);
-            setUser!(response);
+            storeInCookie("token", response.user.token);
+            response.user.database
+              ? router.push("/dashboard")
+              : router.push("/setup");
           } else {
             const response = await Login(values);
-            setUser!(response);
-            setTimeout(() => {
-              console.log(user);
-            }, 2000);
+            storeInCookie("token", response.user.token);
+            response.user.database
+              ? router.push("/dashboard")
+              : router.push("/setup");
           }
           resetForm();
         }}
