@@ -37,3 +37,16 @@ export async function PostCredentials(data: UserData) {
   });
   return await serverResponse.json();
 }
+
+export async function DeleteAllData() {
+  const serverResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER}/delete_all_from_db`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return await serverResponse.json();
+}

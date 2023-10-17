@@ -1,16 +1,15 @@
 "use client";
 
 import Nav from "../components/Nav";
-import { dummy_data } from "@/data";
 import useSWR from "swr";
-import { Suspense, useState, useEffect } from "react";
+import { Suspense } from "react";
 import Cookies from "js-cookie";
-import { mapData } from "@/utils";
 import Data from "../components/Data";
+import { DeleteAllData } from "@/services";
+import ActiveData from "../components/ActiveData";
 
 export default function Dashboard() {
   const token = Cookies.get("token");
-  const [mappedData, setMappedData] = useState<any[]>([]);
 
   const fetcher = (url: string, token: string) =>
     fetch(url, {
@@ -26,6 +25,7 @@ export default function Dashboard() {
 
   return (
     <main>
+      {/* <ActiveData data={data.data} /> */}
       <Nav />
       <section className="flex flex-col gap-4 px-20">
         <h1 className="text-4xl font-bold">Dashboard</h1>
@@ -37,7 +37,13 @@ export default function Dashboard() {
         >
           {!isLoading && <Data data={data.data} />}
         </Suspense>
-        <button className="w-7/12 bg-red-600 py-3 text-white font-bold text-center border border-white mx-auto mt-5">
+        <button // CONFIRM THIS WORKS BEFORE DEPLOYING
+          className="w-7/12 bg-red-600 py-3 text-white font-bold text-center border border-white mx-auto mt-5"
+          onClick={() => {
+            alert("Are you sure you want to delete all data?");
+            DeleteAllData();
+          }}
+        >
           Delete All
         </button>
       </section>
