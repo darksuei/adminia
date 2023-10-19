@@ -1,6 +1,5 @@
 "use client";
 
-import Nav from "../components/Nav";
 import useSWR from "swr";
 import { Suspense } from "react";
 import Cookies from "js-cookie";
@@ -24,7 +23,6 @@ export default function Dashboard() {
 
   return (
     <main>
-      <Nav />
       <section className="flex flex-col gap-4 px-20">
         <h1 className="text-4xl font-bold">Dashboard</h1>
         <p className="text-gray-400 text-sm">Manage existing projects</p>

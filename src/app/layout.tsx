@@ -1,9 +1,16 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Chakra_Petch } from "next/font/google";
+import { Chakra_Petch, Pacifico } from "next/font/google";
 import UserProvider from "@/providers/UserProvider";
+import Nav from "./components/Nav";
 
 const chakra = Chakra_Petch({
+  weight: "400",
+  style: "normal",
+  subsets: ["latin"],
+});
+
+const pacifico = Pacifico({
   weight: "400",
   style: "normal",
   subsets: ["latin"],
@@ -22,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={chakra.className}>
+        <Nav isNotLoggedIn={true} cursive={pacifico} />
         <UserProvider>{children}</UserProvider>
       </body>
     </html>

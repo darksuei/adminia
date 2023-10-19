@@ -3,11 +3,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/utils";
 
-export default function Nav({ isNotLoggedIn }: { isNotLoggedIn: boolean }) {
+export default function Nav({
+  isNotLoggedIn,
+  cursive,
+}: {
+  isNotLoggedIn: boolean;
+  cursive: any;
+}) {
   const router = useRouter();
   return (
     <nav className="w-full h-20 flex flex-row justify-around items-center gap-10 mb-2">
-      <h1 className="text-xl font-bold cursor-pointer">Adminia</h1>
+      <h1 className={`text-xl font-bold cursor-pointer ${cursive.className}`}>
+        Adminia
+      </h1>
       {!isNotLoggedIn ? (
         <ul className="flex flex-row gap-10">
           <li className="cursor-pointer text-sm hover:text-red-400">
