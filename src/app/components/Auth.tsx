@@ -14,7 +14,7 @@ export default function Auth({ isSignUp, title }: Params) {
   const router = useRouter();
 
   return (
-    <main className="h-screen w-full flex items-center">
+    <main className="h-5/6 w-full flex items-center">
       <Formik
         initialValues={{
           name: "",

@@ -50,3 +50,18 @@ export async function DeleteAllData() {
   );
   return await serverResponse.json();
 }
+
+export async function CreateNewData(data: any) {
+  const serverResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER}/insert_to_db`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+  return serverResponse.json();
+}
