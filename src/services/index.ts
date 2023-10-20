@@ -65,3 +65,32 @@ export async function CreateNewData(data: any) {
   );
   return serverResponse.json();
 }
+
+export async function DeleteData(id: string) {
+  const serverResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER}/delete_from_db`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id }),
+    }
+  );
+  return await serverResponse.json();
+}
+
+export async function UpdateData(values: any, id: any) {
+  console.log(values, id);
+  const serverResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER}/update_db`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id, updateData: values }),
+    }
+  );
+  return await serverResponse.json();
+}

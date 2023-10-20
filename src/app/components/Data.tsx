@@ -2,6 +2,7 @@ import { useState } from "react";
 import ActiveData from "./ActiveData";
 import Cookies from "js-cookie";
 import AddData from "./AddData";
+import { DeleteData } from "@/services";
 
 export default function Data({ data }: { data: any }) {
   const [activeData, setActiveData] = useState<number | null>(null);
@@ -11,7 +12,13 @@ export default function Data({ data }: { data: any }) {
   function getKeys(obj: any) {
     return Object.keys(obj);
   }
-  function handleDelete() {}
+  async function handleDelete(e: React.SyntheticEvent, id: string) {
+    e.stopPropagation();
+    console.log(id);
+    alert("Are you sure you want to delete this item?");
+    const response = await DeleteData(id); //CHECK THIS OUT
+    console.log(response);
+  }
   return (
     <div>
       {typeof activeData === "number" && (
@@ -58,7 +65,12 @@ export default function Data({ data }: { data: any }) {
                     setActiveData(idx);
                   }}
                 ></i>
-                <i className="fas fa-trash text-red-700 scale-icon"></i>
+                <i
+                  className="fas fa-trash text-red-700 scale-icon"
+                  onClick={(e) => {
+                    handleDelete(e, item["_id"]);
+                  }}
+                ></i>
               </div>
             </li>
           ))}

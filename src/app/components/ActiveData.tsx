@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Formik, Field, Form } from "formik";
+import { UpdateData } from "@/services";
 
 export default function ActiveData({
   data,
@@ -49,31 +50,49 @@ export default function ActiveData({
             resetForm();
           }}
         >
-          {() => {
+          {({ values }) => {
             return (
-              data &&
-              Object.keys(data).map((item: any, index: number) => {
-                return (
-                  <div
-                    className="flex flex-row gap-5 text-black items-center"
-                    key={index}
-                  >
-                    <p className="text-gray-400 text-lg font-bold">{item} :</p>
-                    <input
-                      type="text"
-                      value={data[item]}
-                      className="p-2 border border-blue-400 w-8/12"
-                    />
+              data && (
+                <Form>
+                  {Object.keys(data).map((item: any, index: number) => {
+                    return (
+                      <div
+                        className="flex flex-row gap-5 text-black items-center mb-2"
+                        key={index}
+                      >
+                        <p className="text-gray-400 text-lg font-bold">
+                          {item} :
+                        </p>
+                        <Field
+                          type="text"
+                          name={item}
+                          id={item}
+                          className="p-2 border border-blue-400 w-8/12"
+                        />
+                      </div>
+                    );
+                  })}
+                  <div className="flex flex-row justify-between mt-3">
+                    <button className="bg-red-600 p-2 w-5/12">Delete</button>
+                    <button
+                      className="bg-blue-500 p-2 w-5/12"
+                      onClick={async () => {
+                        const id = values._id;
+                        const data = values;
+                        delete data._id;
+                        console.log(data, id);
+                        const response = await UpdateData(data, id);
+                        console.log(response);
+                      }}
+                    >
+                      Submit
+                    </button>
                   </div>
-                );
-              })
+                </Form>
+              )
             );
           }}
         </Formik>
-        <div className="flex flex-row justify-between mt-3">
-          <button className="bg-red-600 p-2 w-5/12">Delete</button>
-          <button className="bg-blue-500 p-2 w-5/12">Edit</button>
-        </div>
       </div>
     </main>
   );

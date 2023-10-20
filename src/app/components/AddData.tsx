@@ -55,20 +55,24 @@ export default function AddData({
           {({ submitForm, errors, values }) => (
             <Form>
               {data ? (
-                Object.keys(data).map((item: any, index: number) => (
-                  <div
-                    className="flex flex-row gap-5 text-black items-center mb-2"
-                    key={index}
-                  >
-                    <p className="text-gray-400 text-lg font-bold">{item}:</p>
-                    <Field
-                      type="text"
-                      className="p-2 border border-blue-400 w-8/12"
-                      name={item}
-                      id={item}
-                    />
-                  </div>
-                ))
+                Object.keys(data)
+                  .filter((item) => item !== "_id")
+                  .map((item: any, index: number) => (
+                    <div
+                      className="flex flex-row gap-5 text-black items-center mb-2"
+                      key={index}
+                    >
+                      <p className="text-gray-400 text-lg font-bold">{item}:</p>
+                      {item !== "_id" && (
+                        <Field
+                          type="text"
+                          className="p-2 border border-blue-400 w-8/12"
+                          name={item}
+                          id={item}
+                        />
+                      )}
+                    </div>
+                  ))
               ) : (
                 <div className="flex flex-col items-center">
                   <span className="text-2xl text-gray-300 mb-3">
@@ -81,13 +85,22 @@ export default function AddData({
                 </div>
               )}
               <div className="flex flex-row justify-between mt-3 text-white">
-                <button className="bg-red-600 p-2 w-5/12">Cancel</button>
+                <button
+                  className="bg-red-600 p-2 w-5/12"
+                  onClick={() => {
+                    setter(false);
+                  }}
+                >
+                  Cancel
+                </button>
                 <button
                   className="bg-blue-500 p-2 w-5/12"
                   onClick={() => {
                     submitForm;
-                    console.log(errors, values);
-                    CreateNewData(values);
+                    const data = values;
+                    delete data._id;
+                    console.log(errors, data);
+                    CreateNewData(data);
                   }}
                 >
                   Save
