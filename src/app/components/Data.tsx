@@ -1,13 +1,39 @@
-import { useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import ActiveData from "./ActiveData";
 import Cookies from "js-cookie";
 import AddData from "./AddData";
 import { DeleteData } from "@/services";
+import useSWR from "swr";
+const token = Cookies.get("token");
 
-export default function Data({ data }: { data: any }) {
+export default function Data() {
   const [activeData, setActiveData] = useState<number | null>(null);
   const [addData, setAddData] = useState(false);
-  const tableName = Cookies.get("tableName");
+  const [tableName, setTableName] = useState("");
+
+  useEffect(() => {
+    setTableName(Cookies.get("tableName") || "");
+  }, []);
+
+  const fetcher = async (url: string, token: string) =>
+    fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.json());
+
+  let { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_SERVER}/get_db`,
+    (url) => fetcher(url, token!)
+  );
+
+  if (error) {
+    return <div className="text-red-600 text-2xl">An Error Occurred</div>;
+  }
+
+  data = data?.data;
 
   function getKeys(obj: any) {
     return Object.keys(obj);
@@ -16,9 +42,10 @@ export default function Data({ data }: { data: any }) {
     e.stopPropagation();
     console.log(id);
     alert("Are you sure you want to delete this item?");
-    const response = await DeleteData(id); //CHECK THIS OUT
+    const response = await DeleteData(id);
     console.log(response);
   }
+
   return (
     <div>
       {typeof activeData === "number" && (
@@ -38,7 +65,7 @@ export default function Data({ data }: { data: any }) {
         </span>
       </div>
       <ol className="flex flex-col gap-3">
-        {data &&
+        {data ? (
           data.map((item: any, idx: number) => (
             <li
               className="flex flex-row w-10/12 mx-auto bg-white rounded-lg text-black min-h-14 items-center justify-between px-4 cursor-pointer hover:bg-gray-200 py-3 relative"
@@ -73,7 +100,10 @@ export default function Data({ data }: { data: any }) {
                 ></i>
               </div>
             </li>
-          ))}
+          ))
+        ) : (
+          <div className="text-red-500 text-2xl mx-auto">Loading..</div>
+        )}
       </ol>
     </div>
   );

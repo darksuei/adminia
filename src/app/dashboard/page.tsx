@@ -1,45 +1,19 @@
-"use client";
-
-import useSWR from "swr";
 import { Suspense } from "react";
-import Cookies from "js-cookie";
 import Data from "../components/Data";
-import { DeleteAllData } from "@/services";
+import DeleteAllBtn from "../components/DeleteAllBtn";
 
 export default function Dashboard() {
-  const token = Cookies.get("token");
-
-  const fetcher = (url: string, token: string) =>
-    fetch(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => res.json());
-
-  const { data, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_SERVER}/get_db`,
-    (url) => fetcher(url, token!)
-  );
-
   return (
     <main>
       <section className="flex flex-col gap-4 md:px-20">
         <h1 className="text-4xl font-bold pl-5">Dashboard</h1>
         <p className="text-gray-400 text-sm pl-5">Manage existing projects</p>
         <Suspense
-          fallback={<div className="text-white text-2xl">Loading..</div>}
+          fallback={<div className="text-red-600 text-2xl">Loading..</div>}
         >
-          {!isLoading && <Data data={data.data} />}
+          <Data />
         </Suspense>
-        <button
-          className="w-7/12 bg-red-600 py-3 text-white font-bold text-center border border-white mx-auto mt-5"
-          onClick={() => {
-            alert("Are you sure you want to delete all data?");
-            DeleteAllData();
-          }}
-        >
-          Delete All
-        </button>
+        <DeleteAllBtn />
       </section>
     </main>
   );
