@@ -97,7 +97,7 @@ export default function AddData({
                   className="bg-blue-500 p-2 w-5/12"
                   onClick={() => {
                     submitForm;
-                    const data = values;
+                    const data = { ...values };
                     delete data._id;
                     console.log(errors, data);
                     CreateNewData(data);

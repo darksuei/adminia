@@ -73,6 +73,7 @@ export async function DeleteData(id: string) {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ id }),
     }
@@ -81,15 +82,21 @@ export async function DeleteData(id: string) {
 }
 
 export async function UpdateData(values: any, id: any) {
-  console.log(values, id);
+  console.log(id);
+  const reqbody = {
+    id,
+    updateData: values,
+  };
+  console.log("REQ", typeof reqbody, reqbody);
   const serverResponse = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER}/update_db`,
     {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, updateData: values }),
+      body: JSON.stringify(reqbody),
     }
   );
   return await serverResponse.json();

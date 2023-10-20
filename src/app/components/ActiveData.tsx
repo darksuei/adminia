@@ -78,9 +78,8 @@ export default function ActiveData({
                       className="bg-blue-500 p-2 w-5/12"
                       onClick={async () => {
                         const id = values._id;
-                        const data = values;
+                        const data = { ...values };
                         delete data._id;
-                        console.log(data, id);
                         const response = await UpdateData(data, id);
                         console.log(response);
                       }}
