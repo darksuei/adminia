@@ -4,6 +4,7 @@ import { UserContext } from "@/contexts";
 import { Formik, Form, Field } from "formik";
 import { PostCredentials } from "@/services";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Credentials() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function Credentials() {
       }}
       onSubmit={async (values, { resetForm }) => {
         console.log(values);
+        Cookies.set("databaseUserName", values.databaseUserName);
         const response = await PostCredentials(values);
         resetForm();
         console.log(response);

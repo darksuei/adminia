@@ -2,8 +2,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/utils";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 
 export default function Nav({ cursive }: { cursive: any }) {
   const router = useRouter();
