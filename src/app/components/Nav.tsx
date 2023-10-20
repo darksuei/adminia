@@ -2,27 +2,28 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/utils";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
-export default function Nav({
-  isNotLoggedIn,
-  cursive,
-}: {
-  isNotLoggedIn: boolean;
-  cursive: any;
-}) {
+export default function Nav({ cursive }: { cursive: any }) {
   const router = useRouter();
+  const isLoggedIn = true;
+
   return (
-    <nav className="w-full h-20 flex flex-row justify-around items-center gap-10 mb-2">
+    <nav className="w-full h-20 flex flex-col md:flex-row justify-around items-center gap-x-10 mb-2">
       <h1 className={`text-xl font-bold cursor-pointer ${cursive.className}`}>
         Adminia
       </h1>
-      {!isNotLoggedIn ? (
+      {isLoggedIn ? (
         <ul className="flex flex-row gap-10">
           <li className="cursor-pointer text-sm hover:text-red-400">
             <Link href="/dashboard">Dashboard</Link>
           </li>
           <li className="cursor-pointer text-sm hover:text-red-400">
             <Link href="/setup">Settings</Link>
+          </li>
+          <li className="cursor-pointer text-sm hover:text-red-400">
+            <Link href="/login">Login</Link>
           </li>
           <li
             className="cursor-pointer text-sm hover:text-red-400"

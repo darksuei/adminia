@@ -40,7 +40,7 @@ export default function Auth({ isSignUp, title }: Params) {
         }}
       >
         {() => (
-          <Form className="w-7/12 h-fit m-auto bg-white text-black p-10 rounded-md flex flex-col justify-center gap-5">
+          <Form className="w-10/12 md:w-7/12 h-fit m-auto bg-white text-black p-10 rounded-md flex flex-col justify-center gap-5">
             <h1 className="text-center text-black text-3xl">{title}</h1>
             {isSignUp && (
               <div className="form-item">

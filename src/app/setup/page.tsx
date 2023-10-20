@@ -3,7 +3,7 @@ import SetUpForm from "../components/SetupForm";
 
 export default function SetUp() {
   return (
-    <main>
+    <main className="mt-10 md:mt-0">
       <Main title="Set up your Organization">
         <SetUpForm />
       </Main>

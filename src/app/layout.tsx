@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={chakra.className}>
-        <Nav isNotLoggedIn={true} cursive={pacifico} />
+        <Nav cursive={pacifico} />
         <UserProvider>{children}</UserProvider>
       </body>
     </html>

@@ -71,9 +71,9 @@ export default function SetUpForm() {
           </div>
           <div className="form-item">
             <label>Database System</label>
-            <div className="form-min-item">
+            <div className="flex flex-col md:flex-row gap-5">
               <div
-                className={`w-2/12 h-20 border p-4 rounded-lg ${
+                className={`w-8/12 md:w-2/12 h-20 border p-4 rounded-lg ${
                   activeDatabase === "mysql"
                     ? "border-2 border-blue-500 text-white"
                     : ""
@@ -90,7 +90,7 @@ export default function SetUpForm() {
                 />
               </div>
               <div
-                className={`w-2/12 h-20 border p-4 rounded-lg ${
+                className={`w-8/12 md:w-2/12  h-20 border p-4 rounded-lg ${
                   activeDatabase === "postgres"
                     ? "border-2 border-blue-500 text-white"
                     : ""
@@ -105,7 +105,7 @@ export default function SetUpForm() {
                 />
               </div>
               <div
-                className={`w-2/12 h-20 border p-4 rounded-lg ${
+                className={`w-8/12 md:w-2/12  h-20 border p-4 rounded-lg ${
                   activeDatabase === "mongodb"
                     ? "border-2 border-blue-500 text-white"
                     : ""

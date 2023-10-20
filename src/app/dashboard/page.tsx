@@ -23,15 +23,15 @@ export default function Dashboard() {
 
   return (
     <main>
-      <section className="flex flex-col gap-4 px-20">
-        <h1 className="text-4xl font-bold">Dashboard</h1>
-        <p className="text-gray-400 text-sm">Manage existing projects</p>
+      <section className="flex flex-col gap-4 md:px-20">
+        <h1 className="text-4xl font-bold pl-5">Dashboard</h1>
+        <p className="text-gray-400 text-sm pl-5">Manage existing projects</p>
         <Suspense
           fallback={<div className="text-white text-2xl">Loading..</div>}
         >
           {!isLoading && <Data data={data.data} />}
         </Suspense>
-        <button // CONFIRM THIS WORKS BEFORE DEPLOYING
+        <button
           className="w-7/12 bg-red-600 py-3 text-white font-bold text-center border border-white mx-auto mt-5"
           onClick={() => {
             alert("Are you sure you want to delete all data?");
